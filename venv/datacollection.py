@@ -2,6 +2,7 @@ import cv2
 from cvzone.HandTrackingModule import HandDetector
 import numpy as np
 import math
+import time
 
 # initialize the webcam (this is a constructor)
 # 0 refers to the first webcam device on the system
@@ -12,6 +13,9 @@ detector = HandDetector(maxHands=1)
 # creating an offset for the image cropping
 offset = 20
 imgSize = 300
+
+folder = "/Users/somyasrivastava/Desktop/Projects/Hand_Sign_Detection/Data/C"
+counter = 0
 
 # starting an infinite loop to continuously capture frames
 while True:
@@ -67,4 +71,9 @@ while True:
     # displaying the captured frame in a window named Image
     cv2.imshow('Image', img)
     # controls the display delay timing
-    cv2.waitKey(1)
+    key = cv2.waitKey(1)
+
+    if key == ord("s"):
+        counter += 1
+        cv2.imwrite(f'{folder}/Image_{time.time()}.jpg', imgWhite)
+        print(counter)
